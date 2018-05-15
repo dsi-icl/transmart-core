@@ -8,6 +8,7 @@ import org.transmartproject.core.multidimquery.CrossTableResource
 import org.transmartproject.core.multidimquery.PatientSetResource
 import org.transmartproject.core.multidimquery.query.Combination
 import org.transmartproject.core.multidimquery.query.Constraint
+import org.transmartproject.core.multidimquery.query.MultipleSubSelectionsConstraint
 import org.transmartproject.core.multidimquery.query.Operator
 import org.transmartproject.core.multidimquery.query.PatientSetConstraint
 import org.transmartproject.core.users.User
@@ -24,22 +25,14 @@ class CrossTableService extends AbstractDataResourceService implements CrossTabl
 
     @Override
     CrossTable retrieveCrossTable(List<Constraint> rowConstraints, List<Constraint> columnConstraints,
-                                           Long patientSetId, User user) {
+                                  Constraint subjectConstraint, User user) {
 
-        Constraint patientSetConstraint = new PatientSetConstraint(patientSetId)
-        return buildCrossTable(rowConstraints, columnConstraints, patientSetConstraint, user)
-    }
-
-    private CrossTable buildCrossTable(List<Constraint> rowConstraints,
-                                                           List<Constraint> columnConstraints,
-                                                           Constraint patientSetConstraint,
-                                                           User user) {
         log.info "Building a cross table..."
         List rows = []
         for (Constraint rowConstraint : rowConstraints) {
             def counts = []
             for (Constraint columnConstraint : columnConstraints) {
-                counts.add(getCrossTableCell(rowConstraint, columnConstraint, patientSetConstraint, user))
+                counts.add(getCrossTableCell(rowConstraint, columnConstraint, subjectConstraint, user))
             }
             rows.add(new CrossTableImpl.CrossTableRowImpl(counts))
         }
@@ -59,7 +52,7 @@ class CrossTableService extends AbstractDataResourceService implements CrossTabl
                 return 0
             }
         }
-        Constraint crossConstraint = new Combination(Operator.AND, constraints)
+        Constraint crossConstraint = new MultipleSubSelectionsConstraint('patient', Operator.AND, constraints)
         return aggregateDataService.counts(crossConstraint, user).patientCount
     }
 
