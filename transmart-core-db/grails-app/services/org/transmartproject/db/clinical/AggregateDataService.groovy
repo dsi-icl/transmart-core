@@ -43,11 +43,15 @@ import org.transmartproject.db.multidimquery.query.*
 import org.transmartproject.db.support.ParallelPatientSetTaskService
 import org.transmartproject.db.user.User as DbUser
 import org.transmartproject.db.util.HibernateUtils
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import static org.transmartproject.db.support.ParallelPatientSetTaskService.TaskParameters
 import static org.transmartproject.db.support.ParallelPatientSetTaskService.SubtaskParameters
 
 class AggregateDataService extends AbstractDataResourceService implements AggregateDataResource {
+
+    static final Logger log = LoggerFactory.getLogger(AggregateDataService.class)
 
     @Autowired
     UsersResource usersResource
@@ -130,14 +134,14 @@ class AggregateDataService extends AbstractDataResourceService implements Aggreg
     }
 
     @Override
-    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.cachedCounts',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.cachedCounts',
+//            key = '{ #constraint.toJson(), #user.username }')
     Counts counts(Constraint constraint, User user) {
         freshCounts(constraint, user)
     }
 
-    @CachePut(value = 'org.transmartproject.db.clinical.AggregateDataService.cachedCounts',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @CachePut(value = 'org.transmartproject.db.clinical.AggregateDataService.cachedCounts',
+//            key = '{ #constraint.toJson(), #user.username }')
     @Transactional(readOnly = true)
     Counts updateCountsCache(Constraint constraint, User user) {
         freshCounts(constraint, user)
@@ -207,8 +211,8 @@ class AggregateDataService extends AbstractDataResourceService implements Aggreg
     }
 
     @Override
-    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerConcept',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerConcept',
+//            key = '{ #constraint.toJson(), #user.username }')
     @Transactional(readOnly = true)
     Map<String, Counts> countsPerConcept(Constraint constraint, User user) {
         log.debug "Fetching counts per concept for user: ${user.username}, constraint: ${constraint.toJson()}"
@@ -239,15 +243,15 @@ class AggregateDataService extends AbstractDataResourceService implements Aggreg
     }
 
     @Override
-    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudy',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudy',
+//            key = '{ #constraint.toJson(), #user.username }')
     @Transactional(readOnly = true)
     Map<String, Counts> countsPerStudy(Constraint constraint, User user) {
         freshCountsPerStudy(constraint, user)
     }
 
-    @CachePut(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudy',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @CachePut(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudy',
+//            key = '{ #constraint.toJson(), #user.username }')
     @Transactional(readOnly = true)
     Map<String, Counts> updateCountsPerStudyCache(Constraint constraint, User user) {
         freshCountsPerStudy(constraint, user)
@@ -340,16 +344,16 @@ class AggregateDataService extends AbstractDataResourceService implements Aggreg
     }
 
     @Override
-    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudyAndConcept',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @Cacheable(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudyAndConcept',
+//            key = '{ #constraint.toJson(), #user.username }')
     @Transactional(readOnly = true)
     Map<String, Map<String, Counts>> countsPerStudyAndConcept(Constraint constraint, User user) {
         log.debug "Fetching counts per per study per concept for user: ${user.username}, constraint: ${constraint.toJson()}"
         parallelCountsPerStudyAndConcept(constraint, user)
     }
 
-    @CachePut(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudyAndConcept',
-            key = '{ #constraint.toJson(), #user.username }')
+//    @CachePut(value = 'org.transmartproject.db.clinical.AggregateDataService.countsPerStudyAndConcept',
+//            key = '{ #constraint.toJson(), #user.username }')
     @Transactional(readOnly = true)
     Map<String, Map<String, Counts>> updateCountsPerStudyAndConceptCache(Constraint constraint,
                                                             User user,

@@ -64,7 +64,6 @@ class I2b2 extends AbstractI2b2Metadata implements Serializable {
     }
 
     static constraints = {
-        HibernateUtils.fixupClassPropertyFetcher(I2b2)
 
         cTotalnum      nullable: true
         cComment       nullable: true

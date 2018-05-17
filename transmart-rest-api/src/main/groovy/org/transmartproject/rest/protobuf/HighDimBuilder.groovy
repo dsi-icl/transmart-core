@@ -185,6 +185,7 @@ class HighDimBuilder {
         }
     }
 
+    @CompileStatic(groovy.transform.TypeCheckingMode.SKIP)
     private Row createRow(ColumnOrderAwareDataRow<AssayColumn, ?> inputRow) {
         rowBuilder.clear()
         rowBuilder.label = inputRow.label

@@ -22,7 +22,6 @@ package org.transmartproject.db.dataquery.highdim.correlations
 import grails.orm.HibernateCriteriaBuilder
 import grails.util.Holders
 import groovy.util.logging.Slf4j
-import org.grails.orm.hibernate.persister.entity.GroovyAwareSingleTableEntityPersister
 import org.hibernate.Criteria
 import org.hibernate.HibernateException
 import org.hibernate.Session

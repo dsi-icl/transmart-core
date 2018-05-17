@@ -72,7 +72,6 @@ abstract class AbstractI2b2Metadata extends AbstractQuerySpecifyingType
     }
 
     static constraints = {
-        HibernateUtils.fixupClassPropertyFetcher(AbstractI2b2Metadata)
 
         level             nullable: false, min:     0
         fullName          nullable: false, size:    2..700

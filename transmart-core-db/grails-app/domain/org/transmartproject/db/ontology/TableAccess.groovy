@@ -86,7 +86,6 @@ class TableAccess extends AbstractQuerySpecifyingType implements
     }
 
     static constraints = {
-        HibernateUtils.fixupClassPropertyFetcher(TableAccess)
 
         tableCode maxSize: 50
         tableName maxSize: 50

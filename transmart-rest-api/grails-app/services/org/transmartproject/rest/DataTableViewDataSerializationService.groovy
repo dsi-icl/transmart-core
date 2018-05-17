@@ -34,12 +34,16 @@ import org.transmartproject.rest.serialization.Format
 import org.transmartproject.rest.serialization.tabular.DataTableTSVSerializer
 import org.transmartproject.rest.serialization.tabular.TabularResultSerializer
 import org.transmartproject.rest.serialization.tabular.TabularResultTSVSerializer
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import java.util.zip.ZipOutputStream
 
 @Transactional
 @CompileStatic
 class DataTableViewDataSerializationService implements DataSerializer {
+
+    static final Logger log = LoggerFactory.getLogger(DataTableViewDataSerializationService.class)
 
     @Autowired
     MultiDimensionalDataResource multiDimService

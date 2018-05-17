@@ -38,6 +38,8 @@ import org.transmartproject.rest.serialization.Format
 import org.transmartproject.rest.serialization.tabular.TabularResultSPSSSerializer
 import org.transmartproject.rest.serialization.tabular.TabularResultSerializer
 import org.transmartproject.rest.serialization.tabular.TabularResultTSVSerializer
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import java.util.zip.ZipOutputStream
 
@@ -47,6 +49,8 @@ import static org.transmartproject.db.support.ParallelPatientSetTaskService.Task
 @Transactional
 @CompileStatic
 class SurveyTableViewDataSerializationService implements DataSerializer {
+
+    static final Logger log = LoggerFactory.getLogger(SurveyTableViewDataSerializationService.class)
 
     @Autowired
     MultiDimensionalDataResource multiDimService

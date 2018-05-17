@@ -7,6 +7,7 @@ dependencies {
     compile "org.grails:grails-web-boot"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:scaffolding"
+    compile "org.aspectj:aspectjrt"
     console "org.grails:grails-console"
     profile "org.grails.profiles:web-plugin"
     provided "org.grails:grails-plugin-services"

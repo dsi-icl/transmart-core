@@ -143,8 +143,8 @@ class TreeCacheService {
         forest
     }
 
-    @CachePut(value = 'org.transmartproject.db.tree.TreeCacheService',
-            key = '{ #isAdmin, #studyTokens, #rootPath, #maxLevel }')
+//    @CachePut(value = 'org.transmartproject.db.tree.TreeCacheService',
+//            key = '{ #isAdmin, #studyTokens, #rootPath, #maxLevel }')
     List<TreeNode> updateSubtreeCache(boolean isAdmin = false, List<String> studyTokens = [], String rootPath = I2b2Secure.ROOT, int maxLevel = 0) {
         fetchSubtree(isAdmin, studyTokens, rootPath, maxLevel)
     }
@@ -162,8 +162,8 @@ class TreeCacheService {
      *
      * @return the list of top level tree nodes with child nodes embedded.
      */
-    @Cacheable(value = 'org.transmartproject.db.tree.TreeCacheService',
-            key = '{ #isAdmin, #studyTokens, #rootPath, #maxLevel }')
+//    @Cacheable(value = 'org.transmartproject.db.tree.TreeCacheService',
+//            key = '{ #isAdmin, #studyTokens, #rootPath, #maxLevel }')
     List<TreeNode> fetchCachedSubtree(boolean isAdmin = false, List<String> studyTokens = [], String rootPath = I2b2Secure.ROOT, int maxLevel = 0) {
         fetchSubtree(isAdmin, studyTokens, rootPath, maxLevel)
     }

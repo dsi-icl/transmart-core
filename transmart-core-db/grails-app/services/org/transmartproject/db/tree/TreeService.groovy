@@ -25,6 +25,8 @@ import org.transmartproject.db.user.User as DbUser
 import org.transmartproject.core.users.User
 import org.transmartproject.db.util.SharedLock
 import org.transmartproject.db.util.StringUtils
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import javax.annotation.Resource
 
@@ -33,6 +35,8 @@ import static grails.async.Promises.task
 @Transactional(readOnly = true)
 @CompileStatic
 class TreeService implements TreeResource {
+
+    static final Logger log = LoggerFactory.getLogger(TreeService.class)
 
     @Autowired
     UsersResource usersResource
